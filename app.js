@@ -1,4 +1,12 @@
+// loading many modules, index style
+// node will not be able to find greet.js
+// because it doesn't exist, 
+// it will then look for a folder with the same name
+// within that folder it will look for index.js where 
+// we are exposing our english and spanish modules
+// in an object via module.exports in the index.js
 
-var person = require('./person');
+var greet = require('./greet');
 
-person.greet();
+greet.english();
+greet.spanish();
