@@ -1,15 +1,14 @@
-//::Asynchronous code, libuv, the event loop, streams and more
-//Javascript is synchronous! js just rocks it one thing at a time
-//Node is asynchronous for sure, the v8 JS engine does not!
+//Binary data, Character sets and encoding
+//Node expands on Javascript and gives us tool to deal with
+//binary data, which JS isnt very good at dealing with
 
-//when we discuss asynchronous JS we are really talking about what 
-//the Javascript engine is sitting inside of ie the browser or node
+//Buffers
 
-//libuv, the event loop, and non-blocking asynchronous code
+var buffed = new Buffer('Hello', 'utf8');
+console.log(buffed);
+console.log(buffed.toString());
+console.log(buffed.toJSON());
+console.log(buffed[2]);
 
-//Buffer:
-//A temporary holding spot for data being moved from on place to another.
-
-//Stream:
-//A sequence of data made available over time. 
-//Pieces of data that eventually combine into a whole
+buffed.write('wo');
+console.log(buffed.toString());
