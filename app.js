@@ -1,28 +1,24 @@
-//Streams
-//Chunks: data is split in chunks and streamed
-//Streams are event emiters have access to on and emit
-//Old stream code and new stream code.
-//now there is a variety of streams
-//Stream .Readbale, .Writable, .Duplex, .Transfom, .PassThrough
-//they are what they sound like
-//Streams are an abstract class, a type of constructer you never work directly work with, but inherit from.
+//::HTTP and being a web server
+//protocol: a set of rules that two sides aggree on when communicating, so the server and the client are programmed to understand
 
-//Pipes 
-//how you connect two streams by writing to one stream what is being read from another 
-var fs = require('fs');
-var zlib = require('zlib');
+//how do the client and server identify each other
+//thats where tcp and ip come in.
+//socket is where the information flow through
 
-var readable = fs.createReadStream(__dirname + '/greet.txt'); //read from source (container)
+//the way the info is sent is TCP 
+//all travelling from computer to computer using internet protocal to identify
 
-var writable = fs.createWriteStream(__dirname + '/greetcopy.txt'); //writing to destination (container)
+//how do we send that information, http, ftp and smtp
+//not just how the information is structured
+// the was that information is sent is called TCP
+//Transmition control protocol
 
-var compressed = fs.createWriteStream(__dirname + '/greet.txt.gz'); // so we can write to gzip (container)
+//TCP is what says we will take that information, however its structured and split it into pieces and send those pieces one at a time through the socket. Each piece is called a packet.
 
-var gzip = zlib.createGzip(); //container that willapply zlib algo to compress when called
+//the act of separating out whatever protocol construct into little peices and sending it through the wire is called TCP.
 
-//here we actually invoke something we send our source to desination
-readable.pipe(writable);
+//Because we need IP to know where to send them, we typically refer to these together TCP IP
 
-//here we are sending out source to gzip to compress
-//straight after that because the pipe function returns the result, we send it to compressed another writable stream
-readable.pipe(gzip).pipe(compressed);
+//This resembles streams in node and indeed node does treat this process as such. more to come on this.
+
+//sockets the connection between two pcs
