@@ -7,18 +7,22 @@
 //they are what they sound like
 //Streams are an abstract class, a type of constructer you never work directly work with, but inherit from.
 
+//Pipes 
+//how you connect two streams by writing to one stream what is being read from another 
 var fs = require('fs');
-//the stream will fill a buffer with contents
-//if the contents are the same size or smaller than the buffer
-//then we'll just get all the data
-//if its bigger than the buffer size then we will get peices or the data so read data, fill buffer, emit peice repeat, until we have all the data
-var readable = fs.createReadStream(__dirname + '/greet.txt', { encoding:'utf8', highWaterMark: 16 * 1024 });
+var zlib = require('zlib');
 
-var writable = fs.createWriteStream(__dirname + '/greetcopy.txt');
+var readable = fs.createReadStream(__dirname + '/greet.txt'); //read from source (container)
 
-readable.on('data', function(chunk){
-    console.log(chunk.length);
-    writable.write('#####################################################################################################################################################################################################################################################################################################################################\n' 
-    + chunk + '\n');
-    //just copied the files by listening for the data event because a stream is an event emitter
-})
+var writable = fs.createWriteStream(__dirname + '/greetcopy.txt'); //writing to destination (container)
+
+var compressed = fs.createWriteStream(__dirname + '/greet.txt.gz'); // so we can write to gzip (container)
+
+var gzip = zlib.createGzip(); //container that willapply zlib algo to compress when called
+
+//here we actually invoke something we send our source to desination
+readable.pipe(writable);
+
+//here we are sending out source to gzip to compress
+//straight after that because the pipe function returns the result, we send it to compressed another writable stream
+readable.pipe(gzip).pipe(compressed);
