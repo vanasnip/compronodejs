@@ -1,14 +1,17 @@
-//Binary data, Character sets and encoding
-//Node expands on Javascript and gives us tool to deal with
-//binary data, which JS isnt very good at dealing with
+//ES6 typed arrays
+// ways for javascript to deal with binary data
+var buffer = new ArrayBuffer(8) //8 byte or 64 bits
 
-//Buffers
+var view = new Int32Array(buffer); //<<typed array 
+//dealing with binary data in buffer
 
-var buffed = new Buffer('Hello', 'utf8');
-console.log(buffed);
-console.log(buffed.toString());
-console.log(buffed.toJSON());
-console.log(buffed[2]);
+//when i read from the array I'm reading from the buffer
+//if i change the array I'm changing the buffer
+// Int32Array : converts into the appropriate format
+// Int32Array > 32bits 32 zeros and ones
 
-buffed.write('wo');
-console.log(buffed.toString());
+view[0] = 5;
+view[1] = 15; // only takes 2 number because of the contruct of
+//how big we made the buffer and the Int32Array...<<evaluate
+view[2] = 30;
+console.log(view);
