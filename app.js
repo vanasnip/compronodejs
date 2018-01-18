@@ -1,30 +1,33 @@
-var num = 0;
-function greet(callback){
-    console.log('_______________________________');
-    console.log('the function was invoked');
-    callback();
-}
-var callback1 = function(){
-    console.log('then the callback was invoked');
-    console.log('_______________________________');
-}
+//Files and fs
+//buffers and callbacks
+var fs = require('fs');//node core
 
-greet(callback1);
+var greet = fs.readFileSync(__dirname + '/greet.txt', 'utf8');
+// __dirname is a param in the c++ wrapper that I have access to
+//.readFileSync is node telling us that this is a synchronous operation
+//can be useful for required config file for instance.
+console.log(greet);
 
 
-//how we structure if the call back takes a parameter
-function greet2(lastname, callback){
-    //set a value here that is always passed to the callback
-    var data = {
-        firstname: 'John',
-    }
-    callback(data.firstname, lastname);
-}
+//in many cases we dont want this the be a synchronous operation
+//to make it async we use .readFile, it takes the same params as ..Sync + a callback
+var greet2 = fs.readFile(__dirname + '/greet.txt', 'utf8',
+function(err, data){ // error first callbacks node concept
+    console.log('Async: ',data);
+});
 
-var callback2 = function(firstname, lastname){
-    console.log('hello', firstname, lastname);
-    console.log('call back with passed in param runs');
-    console.log('_______________________________');
-}
+//proof that its Async 
+console.log('Done!');
 
-greet2('Doe', callback2);
+//always lean to the async option!
+
+//We still have a problem in the we are using a buffer and
+//it just sits in memory in something called the heap in V8, node sticks it there. 
+
+//this is why we need streams..
+
+
+
+
+
+
