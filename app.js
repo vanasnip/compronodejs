@@ -1,17 +1,30 @@
-//ES6 typed arrays
-// ways for javascript to deal with binary data
-var buffer = new ArrayBuffer(8) //8 byte or 64 bits
+var num = 0;
+function greet(callback){
+    console.log('_______________________________');
+    console.log('the function was invoked');
+    callback();
+}
+var callback1 = function(){
+    console.log('then the callback was invoked');
+    console.log('_______________________________');
+}
 
-var view = new Int32Array(buffer); //<<typed array 
-//dealing with binary data in buffer
+greet(callback1);
 
-//when i read from the array I'm reading from the buffer
-//if i change the array I'm changing the buffer
-// Int32Array : converts into the appropriate format
-// Int32Array > 32bits 32 zeros and ones
 
-view[0] = 5;
-view[1] = 15; // only takes 2 number because of the contruct of
-//how big we made the buffer and the Int32Array...<<evaluate
-view[2] = 30;
-console.log(view);
+//how we structure if the call back takes a parameter
+function greet2(lastname, callback){
+    //set a value here that is always passed to the callback
+    var data = {
+        firstname: 'John',
+    }
+    callback(data.firstname, lastname);
+}
+
+var callback2 = function(firstname, lastname){
+    console.log('hello', firstname, lastname);
+    console.log('call back with passed in param runs');
+    console.log('_______________________________');
+}
+
+greet2('Doe', callback2);
