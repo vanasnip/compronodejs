@@ -21,4 +21,31 @@
 
 //This resembles streams in node and indeed node does treat this process as such. more to come on this.
 
-//sockets the connection between two pcs
+//sockets the connection between two pcs, specifically the end
+
+//Ports, once the computer recieves a packet, a port is how it knows what program to send it to. It is said that the program is listening to that port
+// the port is specifed as part of the address
+
+// 78.132.160.4:443 // https://www.google.com
+//the whole thing is know as the socket address
+// 78.132.160.4 is the ip and 443 is the port
+
+
+//http - hypertext markup language, the format of the information being sent is http
+
+//simplified eg of a HTTP request
+//CONNECT www.google.com:443 HTTP/1.1
+//Host:www.google.com
+//Connection: keep-alive
+
+//simplified eg of a HTTP request
+//status //HTTP/1.1 200 OK
+//headers//Content-Length: 44
+//       //Content-Type:text/html <<MIME type|||||
+                    // Multipurpose internet main extensions
+                    // A standard for specifying the type of data being sent. image/jpeg, application/json
+//body   //<html><head> ...</head></html>
+
+// in general these are called headers
+
+//this is just a protocol that both the client and the server are programmed to use.
