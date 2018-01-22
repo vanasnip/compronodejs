@@ -1,48 +1,27 @@
-//Querystring and post parameters
+//RESTful APIs and JSON
+//REST: is an architechural style for building APIs
+//Representational state transfer : this mean that when we handle http requests we decide that the HTTP verbs and URLs mean something
 
+//Standardise the way of using the http requests, so when they are sent, when you read them they match whats happening
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+//the follwoing demonstrates the idea of a restful api where the verbs or url describe whats going on
 
-//Environment vaiables: global vars specific to the enviro(server) our code is living
-//a way for the server to set the enviro var
-var port = process.env.PORT || 3000;
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var jsonParser = bodyParser.json();
-app.use('/assets', express.static('public'))
+//having a restful api means that you design the use of your verbs such they respond in a way that is expected
 
-app.set('view engine', 'ejs');
+//you also look at the url and understand what its doing 
 
-app.use('/',function(req, res, next){
-    console.log('Request URL: ' + req.url);
-    next();
+//for example below, looking at app.get and the url person, its speaking about getting a person. same goes for app.post url: person etc
+
+// Its very easy building basic rest APIs with 
+app.get('/api/person', function(req, res){
+    //get that data from the database
 })
 
-app.get('/', function(req, res){
-    res.render('index');
-})
-
-app.get('/person/:id', function(req, res){
-    res.render('person',{ID:req.params.id, Qstr: req.query.qstr})
+app.post('/api/person', function(req, res){
+    //save that data to the database
 });
 
-app.post('/person', urlencodedParser, function(req, res){
-    res.send('thank you');
-    console.log(req.body.firstname);
-    console.log(req.body.lastname);
+app.delete('/api/person', function(req, res){
+    //delete that data to the database
 });
-
-app.post('/personjson', jsonParser, function(req, res){
-    res.send('Thank you for the JSON data!');
-    console.log(req.body.firstname);
-    console.log(req.body.lastname);
-});
-app.get('/api', function(req, res){
-    res.json({
-        firstname: 'John',
-        lastname: 'Doe'
-    });
-})
-
 app.listen(port);
