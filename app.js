@@ -1,23 +1,19 @@
-//Using nodemon means the server refreshes after any changes to the js
-var http = require('http');
-  var fs = require('fs');
-  
+//::Installing express and making it easier to build a web server
+var express = require('express');
+var app = express();
+//Environment vaiables: global vars specific to the enviro(server) our code is living
+//a way for the server to set the enviro var
+var port = process.env.PORT || 3000;
 
-http.createServer(function(req, res){
-    console.log(res.url);
-    if(req.url === '/'){
-        fs.createReadStream(__dirname + '/index.htm').pipe(res);
-    } 
-    else if (req.url === '/json'){
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        var obj = {
-            firstname: 'John',
-            lastname: 'Doe'
-        };
-        res.end(JSON.stringify(obj));
-    } else {
-        res.writeHead(404);
-        fs.createReadStream(__dirname + '/nourl.htm').pipe(res);
-    }
-      
-  }).listen(1337, '127.0.0.1');
+//HTTP Method / VERBS : GET, POST, DELETE
+app.get('/', function(req, res){
+    res.send('<html><head></head><body><h1>Hello World!</h1></body></html>')
+});
+app.get('/api', function(req, res){
+    res.json({
+        firstname: 'John',
+        lastname: 'Doe'
+    });
+})
+
+app.listen(port);
